@@ -8,8 +8,9 @@ public class Game {
 	private int y;
 	private int count = 0;
 	private static Game ga = new Game();
-	ArrayList<int [][]> tlist = new ArrayList<int [][]>();
-	ArrayList<int [][]> slist = new ArrayList<int [][]>();
+	ArrayList<int [][]> tlist;
+	ArrayList<int[][]> slist;
+	
 	
 
 	public void setRow(int r) {
@@ -41,6 +42,7 @@ public class Game {
 	}
 	public int[][] makegridcheckship(int[][] backgrid,int ui) {
 		int ship = getShipDiff(ui);
+		slist = new ArrayList<int [][]>();
 		Random random = new Random();
 		
 		count = 0;
@@ -60,9 +62,8 @@ public class Game {
 				for (int a = shipcol; a < shipcol + (length + 1); a++) {
 
 					if (backgrid[shiprow][shipcol] == 1) {
-
 						hvship = true;
-
+						
 					}
 				}
 				if (shipcol > 0) {
@@ -73,6 +74,7 @@ public class Game {
 				if (!hvship) {
 					for (int a = shipcol; a < shipcol + length; a++) {
 						backgrid[shiprow][a] = 1;
+						slist.add(backgrid);
 					}
 				}
 			} else {
@@ -89,25 +91,22 @@ public class Game {
 				if (!hvship) {
 					for (int a = shipcol; a > shipcol - length; a--) {
 						backgrid[shiprow][a] = 1;
+						slist.add(backgrid);
 					}
 				}
 			}
 			count++;
-			slist.add(backgrid);
+			
 
 			if (hvship) {
 				hvship = false;
 
 				count -= 1;
-			} else {
-				
-				backgrid[shiprow][shipcol] = 1;
-			}
-			
-
+			} 
 		}
 		
 		return backgrid;
+		
 	}
 	public void checkship(int[] useri){
 		Grid g = new Grid();
@@ -136,6 +135,7 @@ public class Game {
 	}
 	
 	public int[][] makechecktrap(int[][] backgrid, int ui){
+		tlist = new ArrayList<int [][]>();
 		int traplevel = getTrapDiff(ui);
 		count = 0;
 		
@@ -151,13 +151,14 @@ public class Game {
 		
 		if(backgrid[trow][tcol] == 0){
 			backgrid[trow][tcol] = 3;
+			tlist.add(backgrid);
 		}
 		else {
 			count--;
 		}
 		
 		count++;
-		tlist.add(backgrid);
+		
 	}
 	return backgrid;
 	}
@@ -193,10 +194,11 @@ public class Game {
 		}
 	return backgrid;
 	}
-	public ArrayList<int[][]> getshiplist(){
+public ArrayList<int[][]> getshiplist(){
 		
 		return slist;
 	}
+	
 public ArrayList<int[][]> gettraplist(){
 		
 		return tlist;

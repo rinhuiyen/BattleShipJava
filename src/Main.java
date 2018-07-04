@@ -12,11 +12,11 @@ public class Main {
 		System.out.println("Please choose a level by typing in the number.\n 1.Beginner\n 2.Intermediate\n 3.Advance");
 		int userinput = input.nextInt();	
 		grid.map(userinput);
-		
+		System.out.println(life);
 	
 		for(int counter =1; counter >0; counter++){
 			if(checkplayer != 5 && life != 0){
-			System.out.println(life);
+			
 			System.out.println("Please enter the row.");
 			int coorrow = input.nextInt();
 			System.out.println("Please enter the col.");
@@ -49,35 +49,49 @@ public class Main {
 				t.setTType();
 				int tr = t.getTType();
 				
-				System.out.println("You have revealed a trap." );
+				System.out.println("You have revealed a low level trap." );
 				if(tr == 0){
 					life -= 1;
-					System.out.println("You received damage of minus 1 life" + life);
+					System.out.println("You have revealed a high level trap" + life);
 				}
 				else{
 					life -= 2;
-					System.out.println(life);
+					
 				}
 				
 			}
 			else if(show[coorrow-1][coorcol-1] == 4){
 				System.out.println("You have revealed a potion.");
-				grid.setUserMap(coorrow-1, coorcol-1, "T");
+				grid.setUserMap(coorrow-1, coorcol-1, "P");
+				grid.displayUserMap();
 				Potion p = new Potion();
 				p.potion();
-				grid.displayUserMap();
+				int potiontype = p.getpotiontype();
+				if(potiontype== 0){
+					life += 1;
+				}
+				else if(potiontype == 1){
+					for(int i = 0; i < 20; i++){
+						System.out.println(grid.getshiplist());
+					}
+				}else if(potiontype == 2){
+					Game p1 = new Game();
+					for(int i = 0; i < 10; i++){
+						System.out.println(grid.gettraplist());
+					}
+				}
 				life -= 1;
-				System.out.println(life);
+				
 		}
 			else{
 				System.out.println("You missed a ship please try again.");
 				grid.setUserMap(coorrow-1, coorcol-1, " ");
 				grid.displayUserMap();
 				life -= 1;
-				System.out.println(life);
+				
 			}
 			}
-			
+			System.out.println(life);
 }
 }
 }

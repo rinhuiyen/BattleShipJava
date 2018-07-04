@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 
 public class Grid {
@@ -6,17 +8,35 @@ public class Grid {
 	private int col = 60;
 	private String mapDisplay = "";
 	private int[][] show = new int[row][col];
+	private int[][] addship;
+	private int[][] addtrap;
 	String[][] usermap = new String[row][col];
 	Game g = new Game();
-	
+	ArrayList<int [][]> tlist;
+	ArrayList<int[][]> slist;
+
 	
 	
 	public void map(int ui){
-		
+		slist = new ArrayList<int [][]>();
+		tlist = new ArrayList<int [][]>();
 		show= g.checkpotion(show);
 		show= g.makegridcheckship(show,ui);
 		show= g.makechecktrap(show,ui);
 		getGrid();
+		
+		for (int i = 0; i <show.length;i++) {
+			for ( int j = 0; j < show[i].length; j++) {
+				if(show[i][j] == 1){
+					addship = new int[i][j];
+					slist.add(addship);
+				}
+				else if(show[i][j] == 3){
+					addtrap = new int[i][j];
+					tlist.add(addtrap);
+				}
+			}
+		}
 		mapDisplay = "";
 		
 		for (int i = 0; i <show.length;i++) {
@@ -41,15 +61,44 @@ public class Grid {
 	}
 	
 	public void displayUserMap() {
-		mapDisplay ="";
+		mapDisplay += "\n";
+		mapDisplay += ("   "); 
+		for(int k=1; k<=6; k++) {
+			for(int m=1; m<=10; m++) {
+				if(m==10) {
+					mapDisplay += (m-10);
+				}else {
+					mapDisplay += m;
+				}
+			}
+		}
+		mapDisplay += ("\n");
+		mapDisplay += ("   "); 
+		int p=1;
+		for(int k=0; k<1;k++) {
+			for(int h=1; h<=60; h++) {
+				if(h==10*p) {
+					mapDisplay += h/10;
+					p++;
+				}else {
+					mapDisplay += " ";
+				}
+			}
+		}
+		mapDisplay += ("\n");
 		for (int i = 0; i <row;i++) {
+			if(i<9) {
+	    		mapDisplay += " " + (i+1) + " ";
+	    	}else {
+	    		mapDisplay += (i+1) + " ";
+	    	}
 			for ( int j = 0; j < col; j++) {
 				mapDisplay += usermap[i][j];
 				}
 			mapDisplay += "\n";
 			}
 		System.out.println(mapDisplay);
-		
+		mapDisplay = "";
 	}
 	
 	public void setUserMap(int row, int col, String item) {
@@ -60,7 +109,15 @@ public class Grid {
 		return mapDisplay;
 	}
 	
+public ArrayList<int[][]> getshiplist(){
+		
+		return slist;
+	}
 	
+public ArrayList<int[][]> gettraplist(){
+		
+		return tlist;
+	}
 
 	
 	public void setGrid(int x, int y,int obj){

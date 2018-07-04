@@ -27,20 +27,10 @@ public class Potion {
 	public void potion(){
 		Random random = new Random();
 		potiontype = random.nextInt(2);
-		if(potiontype== 0){
 		
-		}
-		else if(potiontype == 1){
-			Game p1 = new Game();
-			for(int i = 0; i < 20; i++){
-				System.out.println(p1.getshiplist());
-			}
-		}else if(potiontype == 2){
-			Game p1 = new Game();
-			for(int i = 0; i < 10; i++){
-				System.out.println(p1.gettraplist());
-			}
-		}
+	}
+	public int getpotiontype(){
+		return potiontype;
 	}
 
 }
