@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -6,16 +7,16 @@ public class Main {
 		Grid grid = new Grid();
 		int checkplayer = 0;
 		int life = 15;
-
-
+		
+		
 		Scanner input = new Scanner(System.in);
 		System.out.println("Please choose a level by typing in the number.\n 1.Beginner\n 2.Intermediate\n 3.Advance");
 		int userinput = input.nextInt();	
 		grid.map(userinput);
-		System.out.println(life);
+		
 	
 		for(int counter =1; counter >0; counter++){
-			if(checkplayer != 5 && life != 0){
+			if(checkplayer != 5 && life > 0){
 			
 			System.out.println("Please enter the row.");
 			int coorrow = input.nextInt();

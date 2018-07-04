@@ -8,40 +8,27 @@ public class Grid {
 	private int col = 60;
 	private String mapDisplay = "";
 	private int[][] show = new int[row][col];
-	private int[][] addship;
-	private int[][] addtrap;
 	String[][] usermap = new String[row][col];
 	Game g = new Game();
-	ArrayList<int [][]> tlist;
-	ArrayList<int[][]> slist;
+	ArrayList<Integer [][]> tlist=  new ArrayList<Integer [][]>();
+	ArrayList<Integer[][]> slist = new ArrayList<Integer [][]>();
 
 	
 	
 	public void map(int ui){
-		slist = new ArrayList<int [][]>();
-		tlist = new ArrayList<int [][]>();
+		/*slist = new ArrayList<int [][]>();
+		tlist = new ArrayList<int [][]>();*/
 		show= g.checkpotion(show);
 		show= g.makegridcheckship(show,ui);
 		show= g.makechecktrap(show,ui);
 		getGrid();
 		
-		for (int i = 0; i <show.length;i++) {
-			for ( int j = 0; j < show[i].length; j++) {
-				if(show[i][j] == 1){
-					addship = new int[i][j];
-					slist.add(addship);
-				}
-				else if(show[i][j] == 3){
-					addtrap = new int[i][j];
-					tlist.add(addtrap);
-				}
-			}
-		}
 		mapDisplay = "";
 		
 		for (int i = 0; i <show.length;i++) {
 			for ( int j = 0; j < show[i].length; j++) {
 				mapDisplay += Integer.toString(show[i][j]);
+				
 				}
 			mapDisplay += "\n";
 			}
@@ -109,12 +96,12 @@ public class Grid {
 		return mapDisplay;
 	}
 	
-public ArrayList<int[][]> getshiplist(){
+public ArrayList<Integer[][]> getshiplist(){
 		
 		return slist;
 	}
 	
-public ArrayList<int[][]> gettraplist(){
+public ArrayList<Integer[][]> gettraplist(){
 		
 		return tlist;
 	}
